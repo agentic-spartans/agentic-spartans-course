@@ -13,7 +13,7 @@ The planner plans the work and the checks the result must pass, and you approve 
 ## Make it yours
 
 1. Copy this folder, paste the copy next to the original, in `clip08`, and give the copy your project's name.
-2. Keep the agents that fit your project and delete the rest. Add an agent only when a job needs a different one: copy an agent file in `.opencode/agents/` and rename it (or copy `.opencode/agent_template.md`), and add its step to `.opencode/commands/do.md`.
+2. The agents are in `.opencode/agents/`. Files that start with a dot are hidden: show them with Command + Shift + period on Mac, View › Show › Hidden items on Windows, or Ctrl + H on Linux. Keeping every agent is fine. If you delete one, also take its step out of `.opencode/commands/do.md`, which lists each agent's step, or ask the team to make both changes. Add an agent only when a job needs a different one: copy an agent file and rename it (or copy `.opencode/agent_template.md`), and add its step to `do.md`.
 3. Write your project's details (what to make, how many, what you decide) in a task file in the folder, such as `my_task.md`.
 
 ## Run it
@@ -21,11 +21,9 @@ The planner plans the work and the checks the result must pass, and you approve 
 1. In OpenCode, open your team folder, not AgentTeams.
 2. Start a new chat for each run. Type `/do Read my_task.md.` (or the full task after `/do`).
 3. Read the plan and its checks, and approve them or ask for changes.
-4. Each run gets its own folder, `runs/run_1/`, `runs/run_2/` and so on: the result in `deliverable/`, each agent's notes in `logs/`, and your report as `report.docx`. Open the report in Word, fill in your judgment and notes, and hand it in.
+4. Each run gets its own folder, `runs/run_1/`, `runs/run_2/` and so on: the result in `deliverable/`, each agent's notes in `logs/`, and your report as `report.docx`. Open the report in Word, fill in your judgment and notes, then hand in your whole team folder as the Final project folder says.
 
 ## What is in the folder
-
-The files that start with a dot are hidden: show them with Command + Shift + period on Mac, View › Show › Hidden items on Windows, or Ctrl + H on Linux.
 
 - `opencode.json`: the model and what the agents may do. Agents may read and write anything in this folder; anything outside it asks first.
 - `.opencode/agents/`: one short file per agent: what it does, and its job in one line. `orchestrator.md` is empty on purpose: its instructions live in `/do`.

@@ -15,7 +15,7 @@ The planner plans the work and the checks the result must pass, and you approve 
 1. In OpenCode, open this folder (AgentTeams › clip03 › clip03_01_full-team), not AgentTeams.
 2. Start a new chat for each task. Type `/do` followed by the full task.
 3. Read the plan and its checks, and approve them or ask for changes.
-4. Each run gets its own folder, `runs/run_1/`, `runs/run_2/` and so on: the result in `deliverable/`, the verifier's check in `logs/verification_report.md`, and your report as `report.docx`. Open the report in Word, fill in your judgment and notes, and hand it in.
+4. Each run gets its own folder, `runs/run_1/`, `runs/run_2/` and so on: the result in `deliverable/`, the verifier's check in `logs/verification_report.md`, and your report as `report.docx`. Open the report in Word, fill in your judgment and notes, then hand in your whole team folder as the Final project folder says.
 
 ## What is in the folder
 
