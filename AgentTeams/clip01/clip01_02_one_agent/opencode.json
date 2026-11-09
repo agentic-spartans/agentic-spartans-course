@@ -1,0 +1,32 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "openrouter/openai/gpt-6-luna",
+  "enabled_providers": ["openrouter"],
+  "websearch": { "provider": "exa" },
+  "agent": {
+    "build": { "disable": true },
+    "plan": { "disable": true },
+    "general": { "disable": true },
+    "explore": { "disable": true }
+  },
+  "provider": {
+    "openrouter": {
+      "whitelist": ["openai/gpt-6-luna"],
+      "models": {
+        "openai/gpt-6-luna": {
+          "options": {
+            "provider": { "order": ["openai", "azure"], "allow_fallbacks": false },
+            "reasoning": { "effort": "high" }
+          }
+        }
+      }
+    }
+  },
+  "permission": {
+    "*": "allow",
+    "bash": "deny",
+    "external_directory": { "*": "deny", "~/.local/share/opencode/tool-output/*": "allow" },
+    "skill": "deny",
+    "execute": "deny"
+  }
+}

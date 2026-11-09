@@ -1,0 +1,13 @@
+{
+  "field": "Graphic design, print layout and photography for a summer internship",
+  "employment_types": ["internship"],
+  "schedules": ["full_time", "part_time"],
+  "places": [
+    {"country": "US", "region": "Michigan", "city": null},
+    {"country": "US", "region": "Illinois", "city": "Chicago"},
+    {"country": "GB", "region": null, "city": "London"}
+  ],
+  "remote_countries": ["US", "GB"],
+  "pay_floor": null,
+  "accept_unpaid": true
+}

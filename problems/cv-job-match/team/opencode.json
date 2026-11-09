@@ -1,0 +1,55 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "openrouter/openai/gpt-6-luna",
+  "enabled_providers": ["openrouter"],
+  "agent": {
+    "build": { "disable": true },
+    "plan": { "disable": true },
+    "general": { "disable": true },
+    "explore": { "disable": true }
+  },
+  "provider": {
+    "openrouter": {
+      "whitelist": ["openai/gpt-6-luna"],
+      "models": {
+        "openai/gpt-6-luna": {
+          "options": {
+            "provider": {
+              "order": ["openai", "azure"],
+              "allow_fallbacks": false
+            },
+            "reasoning": { "effort": "high" }
+          }
+        }
+      }
+    }
+  },
+  "permission": {
+    "*": "allow",
+    "read": {
+      "*.env": "deny",
+      "*.env.*": "deny"
+    },
+    "edit": {
+      "*": "deny",
+      "runs/*/logs/log.md": "allow"
+    },
+    "bash": {
+      "sudo *": "deny",
+      "ssh *": "deny",
+      "scp *": "deny",
+      "git *": "deny",
+      "curl *": "deny",
+      "wget *": "deny",
+      "open *": "deny",
+      "osascript *": "deny"
+    },
+    "external_directory": { "*": "deny", "~/.local/share/opencode/tool-output/*": "allow" },
+    "webfetch": "deny",
+    "websearch": "deny",
+    "skill": "deny",
+    "execute": "deny",
+    "question": "deny",
+    "doom_loop": "deny"
+  }
+}

@@ -1,0 +1,28 @@
+name: release
+# Tag release/<stamp> pushed by studio/release/release.py: build the zips from the committed
+# folders, create the GitHub release, then check the public download.
+on:
+  push:
+    tags: ["release/*"]
+permissions:
+  contents: write
+concurrency: release
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build zips
+        run: python .github/scripts/build_release.py --tag "$GITHUB_REF_NAME" --out dist
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          STAMP="${GITHUB_REF_NAME#release/}"
+          gh release create "$GITHUB_REF_NAME" dist/* --title "Course files $STAMP" --notes-file "release-notes/$STAMP.md" --verify-tag
+      - name: Live check
+        run: python .github/scripts/live_check.py --tag "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY"

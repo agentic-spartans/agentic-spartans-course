@@ -1,0 +1,6 @@
+.DS_Store
+._*
+runs/
+.env
+.env.*
+__pycache__/
