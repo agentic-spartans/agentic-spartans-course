@@ -54,7 +54,15 @@
       "xargs rm*": "ask",
       "sh -c *": "ask",
       "bash -c *": "ask",
-      "zsh -c *": "ask"
+      "zsh -c *": "ask",
+      "Remove-Item *": "ask",
+      "ri *": "ask",
+      "del *": "ask",
+      "erase *": "ask",
+      "rd *": "ask",
+      "cmd /c *": "ask",
+      "powershell *": "ask",
+      "pwsh *": "ask"
     },
     "external_directory": { "*": "deny", "~/.local/share/opencode/tool-output/*": "allow" },
     "webfetch": "deny",

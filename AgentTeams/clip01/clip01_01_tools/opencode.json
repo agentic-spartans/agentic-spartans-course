@@ -28,6 +28,6 @@
     "external_directory": { "*": "deny", "~/.local/share/opencode/tool-output/*": "allow" },
     "skill": "deny",
     "execute": "deny",
-    "bash": { "sudo *": "deny", "curl *": "deny", "wget *": "deny", "rm *": "deny" }
+    "bash": { "sudo *": "deny", "curl *": "deny", "wget *": "deny", "rm *": "deny", "Remove-Item *": "deny", "ri *": "deny", "del *": "deny", "erase *": "deny", "rd *": "deny", "cmd /c *": "deny", "powershell *": "deny", "pwsh *": "deny" }
   }
 }
