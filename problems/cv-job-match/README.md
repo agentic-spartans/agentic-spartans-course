@@ -29,11 +29,11 @@ The orchestrator is the agent you talk to, and it runs the others in turn. The i
 - Step 1: The planner writes the plan, and nothing runs until you approve it.
 - Step 2: The implementer picks six to ten abilities that the CV names outright, each backed by a CV line. In our test, Adobe InDesign came from "Laid out 24-page print issues in Adobe InDesign each semester."
 - Step 3: It sorts each ad by what you want, such as the job type, place and pay. An ad that breaks one of these is ruled out, and an ad that leaves one unanswered needs a closer look.
-- Step 4: The program gives each ad that is not ruled out a percentage score. An ad that names two of eight chosen abilities scores 25 percent.
-- Step 5: Ads with the same title and employer count as one job, and the five real jobs with the highest scores are listed.
-- Step 6: For each of the five, the implementer quotes what the ad requires and writes a caution, a note on what the CV does not show. For the job with the highest score, it suggests up to three CV edits. Each edit only rewords existing CV lines in the ad's words, and if none would help, it says why.
-- Step 7: The program must score the three test ads exactly as we worked them out ourselves.
-- Step 8: The implementer writes a summary that answers the four questions and says that AI wrote it.
+- Step 4: The program gives each ad that is not ruled out a score: the percentage of the chosen abilities its text names. An ad that names two of eight abilities scores 25 percent.
+- Step 5: Ads with the same title and employer count as one job, and the five real jobs with the highest scores are listed. Among jobs with the same score, those with the lowest ad numbers on the job site come first.
+- Step 6: For each of the five, the implementer quotes what the ad requires and writes a caution, a note on what the CV does not show. For the job with the highest score, it suggests up to three CV edits, or says why none would help.
+- Step 7: The program scores the three test ads on two abilities, Adobe InDesign and Figma, and must match our own scores.
+- Step 8: The implementer writes a summary that answers the four questions.
 - Step 9: The reviewer reads the whole result, and the implementer fixes what it lists.
 - Step 10: The verifier redoes the sorting and counting on its own and sends any difference back.
 - Step 11: The report writer writes the report you read, including whether the verifier passed the work.
@@ -42,12 +42,12 @@ The orchestrator is the agent you talk to, and it runs the others in turn. The i
 
 - The sorting looks at only four things: whether the ad is open, the job type and hours, the place, and the pay.
 - It keeps ads from other fields, so the five jobs in our test are far from design.
-- Only exact words count, so a score of 0 does not mean you are unsuited for the job.
+- Only exact words count, like the keyword filters some employers use to sort applications. A score of 0 does not mean you are unsuited for the job.
 - Required degrees or certificates appear only as cautions, and the team never judges whether you may work in a country.
 
 ## What you need to run it
 
-To run this team, Python 3.12 and uv (a free tool that runs Python scripts) must be installed on your computer first. A run stops when it has spent $3.
+A run stops when it has spent $3.
 
 ## What a good answer looks like
 
@@ -58,11 +58,11 @@ To run this team, Python 3.12 and uv (a free tool that runs Python scripts) must
 
 ## What the team found
 
-Our test used a made-up studio art student who wants a summer design or photography internship in Michigan, Chicago or London.
+Our test used a made-up studio art student who wants a summer design or photography internship. It can be full or part time and paid or unpaid, in Michigan, Chicago or London, or remote from the US or UK.
 
-- No real ad fits everything. 70 need a closer look, most often because the ad does not say whether it is an internship. The other 1,292 are ruled out.
-- The team picked eight abilities, such as Adobe InDesign, Photoshop and Figma. None of the 70 ads mentions any of them, so all 70 score 0. The five listed are therefore not recommendations, and the CV shows none of what they ask for.
+- No real ad fits everything. 70 need a closer look because their ads do not say whether the work is in person, hybrid or remote. 19 of them also do not say whether the job is an internship. The other 1,292 are ruled out, most because they are not internships.
+- The team picked eight abilities from the CV: Adobe InDesign, Illustrator, Photoshop, Lightroom, Figma, studio lighting, DSLR camera and hand lettering. None of the 70 ads names any of them, so all score 0. The five listed are the tied jobs with the lowest ad numbers. They are not recommendations, and the CV shows none of what they ask for.
 - The prevention specialist ad asks for a behavioral or social science degree. The information technology specialist ad asks for a computer science degree or IT experience. The logistics management specialist ad asks for top grades, graduate study or logistics experience. The social services assistant ad asks for a year of mental health support work. The radiologic technologist ad asks for X-ray training and certification.
 - The team found no honest CV change for the prevention specialist job, the first of the five. Its ad asks for a behavioral or social science degree, so the team suggested nothing.
-- Two test ads scored 100 percent, as we worked them out. The third was ruled out for its location and got no score. The test ad that requires a first aid certificate kept its caution despite its top score. Removing one ability dropped a test ad's score from 100 to 50 percent.
-- The four made-up art and design internships among the practice ads scored 0 to 37.5 percent, and the four healthcare ones were ruled out. The real ads were saved on October 20, 2026, so some may have closed.
+- Two test ads named both abilities and scored 100 percent, as we worked them out. The third was ruled out for its location and got no score. The test ad that requires a first aid certificate kept its caution despite its top score. Removing Adobe InDesign from one test ad left one of two abilities, so its score dropped from 100 to 50 percent.
+- The four made-up art and design internships among the practice ads scored 0 to 37.5 percent, and the four healthcare ones were ruled out. The print design internship scored highest, naming three of the eight abilities. The real ads were saved on October 20, 2026, so some may have closed.

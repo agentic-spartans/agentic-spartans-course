@@ -30,7 +30,7 @@ function imageSize(buf) { // width and height from a PNG or JPEG header
 }
 
 function mathRuns(tex, style) { // LaTeX between dollar signs, shown as plain text with sub- and superscripts
-  const text = tex.replace(/\\(min|max|log|ln|exp|sin|cos|tan)\b/g, "$1").replace(/\\(left|right|,|;|!)/g, "")
+  const text = tex.replace(/\\([%$&#])/g, "$1").replace(/\\(?:text|textrm|mathrm)\{([^}]*)\}/g, "$1").replace(/\\(min|max|log|ln|exp|sin|cos|tan)\b/g, "$1").replace(/\\(left|right|,|;|!)/g, "")
     .replace(/\\(?:cdot|times)/g, "×").replace(/\\leq?/g, "≤").replace(/\\geq?/g, "≥").replace(/\\neq/g, "≠")
     .replace(/\\approx/g, "≈").replace(/\\pm/g, "±").replace(/\\infty/g, "∞").replace(/\\(?:frac)\{([^}]*)\}\{([^}]*)\}/g, "($1)/($2)")
     .replace(/\\([a-zA-Z]+)/g, (m, name) => GREEK[name] ?? name)
@@ -44,9 +44,9 @@ function mathRuns(tex, style) { // LaTeX between dollar signs, shown as plain te
 const GREEK = { alpha: "α", beta: "β", gamma: "γ", delta: "δ", Delta: "Δ", epsilon: "ε", theta: "θ", lambda: "λ", mu: "μ",
   nu: "ν", pi: "π", rho: "ρ", sigma: "σ", Sigma: "Σ", tau: "τ", phi: "φ", omega: "ω", Omega: "Ω" }
 
-function inline(text, style = {}) { // **bold**, *italic*, `code`, [text](url), $math$
+function inline(text, style = {}) { // **bold**, *italic*, `code`, [text](url), $math$, backslash-escaped characters
   const out = []
-  const re = /\*\*(.+?)\*\*|\*(.+?)\*|`([^`]+)`|\[([^\]]+)\]\(([^)\s]+)\)|\$([^$]+)\$/g
+  const re = /\*\*(.+?)\*\*|\*(.+?)\*|`([^`]+)`|\[([^\]]+)\]\(([^)\s]+)\)|\$((?:\\.|[^$\\])+)\$|\\([\\`*_{}\[\]()#+\-.!$%&|~<>])/g
   let last = 0
   for (const m of text.matchAll(re)) {
     if (m.index > last) out.push(new TextRun({ ...style, text: text.slice(last, m.index) }))
@@ -54,7 +54,8 @@ function inline(text, style = {}) { // **bold**, *italic*, `code`, [text](url), 
     else if (m[2] !== undefined) out.push(...inline(m[2], { ...style, italics: true }))
     else if (m[3] !== undefined) out.push(new TextRun({ ...style, text: m[3], font: "Consolas" }))
     else if (m[4] !== undefined) out.push(new ExternalHyperlink({ link: m[5], children: [new TextRun({ ...style, text: m[4], style: "Hyperlink" })] }))
-    else out.push(...mathRuns(m[6], style))
+    else if (m[6] !== undefined) out.push(...mathRuns(m[6], style))
+    else out.push(new TextRun({ ...style, text: m[7] }))
     last = m.index + m[0].length
   }
   if (last < text.length) out.push(new TextRun({ ...style, text: text.slice(last) }))
@@ -83,6 +84,7 @@ function convert(markdown, folder) {
   const lines = markdown.replace(/\r\n?/g, "\n").split("\n")
   const body = []
   let tables = 0, figures = 0, listId = 0
+  const starts = [] // each numbered list starts at its first item's number
   const caption = (label, n, text) => new Paragraph({ children: [new TextRun({ text: `${label} ${n}. `, bold: true }), ...inline(text)], spacing: { after: 200 } })
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i]
@@ -137,6 +139,7 @@ function convert(markdown, folder) {
     if (item) {
       const numbered = /\d/.test(item[2])
       const ref = numbered ? `numbers${++listId}` : "bullets"
+      if (numbered) starts.push(parseInt(item[2], 10))
       let last = null
       for (; i < lines.length; i++) {
         const m = lines[i].match(/^(\s*)([-*+]|\d+[.)])\s+(.*)$/)
@@ -161,12 +164,12 @@ function convert(markdown, folder) {
     while (i + 1 < lines.length && lines[i + 1].trim() && !/^(#|```|!\[|\s*\||\s*([-*+]|\d+[.)])\s|Table:)/.test(lines[i + 1])) para.push(lines[++i].trim())
     body.push(new Paragraph({ children: inline(para.join(" ")), spacing: { after: 160 } }))
   }
-  const level = (format, text, n) => ({ level: n, format, text, alignment: AlignmentType.LEFT, style: { paragraph: { indent: { left: 360 * (n + 1), hanging: 260 } } } })
+  const level = (format, text, n, start = 1) => ({ level: n, format, text, start, alignment: AlignmentType.LEFT, style: { paragraph: { indent: { left: 360 * (n + 1), hanging: 260 } } } })
   return new Document({
     styles: { default: { document: { run: { font: FONT, size: 22 } } } },
     numbering: { config: [
       { reference: "bullets", levels: [0, 1, 2].map((n) => level(LevelFormat.BULLET, "•", n)) },
-      ...Array.from({ length: listId }, (_, k) => ({ reference: `numbers${k + 1}`, levels: [0, 1, 2].map((n) => level(LevelFormat.DECIMAL, `%${n + 1}.`, n)) })),
+      ...Array.from({ length: listId }, (_, k) => ({ reference: `numbers${k + 1}`, levels: [0, 1, 2].map((n) => level(LevelFormat.DECIMAL, `%${n + 1}.`, n, n === 0 ? starts[k] : 1)) })),
     ] },
     sections: [{ children: body }],
   })

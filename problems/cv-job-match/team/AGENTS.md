@@ -7,5 +7,5 @@
 
 ## Deleting files
 
-- Never move or overwrite anything outside this folder. Delete outside files only with the approval below. To remove a file you made, move it to `runs/<run>/trash/`.
-- Orchestrator: if the user asks you to delete something outside this folder, say what and why, one item at a time, and ask them to type `yes, delete` followed by its full path. Other agents: if a delete is refused, tell the orchestrator and stop.
+- Never move or overwrite anything outside this folder. Delete outside files only when the user asks. To remove a file you made, move it to `runs/<run>/trash/`.
+- Orchestrator: if the user asks you to delete something outside this folder, say what and why, one item at a time. Other agents: if a delete is refused, tell the orchestrator and stop.

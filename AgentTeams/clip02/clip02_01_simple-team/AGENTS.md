@@ -7,4 +7,4 @@
 ## Deleting files
 
 - Never delete, move or overwrite anything outside this folder, by any means. To remove a file you made, move it to `runs/<run>/trash/`.
-- If the user asks you to delete something outside this folder, say what and why, one item at a time, and ask them to type `yes, delete` followed by its full path.
+- If the user asks you to delete something outside this folder, say what and why, one item at a time.

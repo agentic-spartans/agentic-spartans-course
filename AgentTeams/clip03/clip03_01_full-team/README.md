@@ -27,7 +27,6 @@ The files that start with a dot are hidden: show them with Command + Shift + per
 - `.opencode/agent_template.md`: copy it into `.opencode/agents/` to add an agent, and add a step for it in `do.md`.
 - `AGENTS.md`: rules every agent reads (plain sentences, work only inside this folder, how to delete).
 - `.opencode/plugins/run-cost-limit.js`: limits each chat and its agents to about $3. Calls already running can go over. Type `/add-dollar` in that chat to add $1 and continue. Helper agents start in the foreground, so Stop stops them too (unless you press Ctrl+B).
-- `.opencode/plugins/delete-guard.js`: refuses deletes and moves outside this folder until you type `yes, delete <full path>`.
 - `.opencode/plugins/report-docx.js` and `.opencode/vendor/`: turn `report.md` into `report.docx` inside OpenCode, so you install nothing.
 - `tools/render_page.py`: lets the team look at a web page it made, the way a reader would. It needs Python and Playwright, so it matters only when your result is a web page.
 

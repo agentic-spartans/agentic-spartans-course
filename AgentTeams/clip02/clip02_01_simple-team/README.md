@@ -18,6 +18,5 @@ The files that start with a dot are hidden: show them with Command + Shift + per
 - `.opencode/commands/do.md`: the saved prompt behind `/do`. Your topic goes where it says `$ARGUMENTS`; step 4 is where the writer stops to ask you.
 - `AGENTS.md`: rules every agent reads (plain sentences, work only inside this folder, how to delete).
 - `.opencode/plugins/run-cost-limit.js`: stops a run at $3; type `/add-dollar` to add $1 and continue. Helper agents start in the foreground, so Stop stops them too (unless you press Ctrl+B).
-- `.opencode/plugins/delete-guard.js`: refuses deletes and moves outside this folder until you type `yes, delete <full path>`.
 
 These rules prevent accidents; they do not lock the agents in. Keep files you care about out of AgentTeams.
